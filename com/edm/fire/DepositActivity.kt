@@ -128,25 +128,17 @@ class DepositActivity : AppCompatActivity() {
     private fun initializeRemoteConfig() {
         remoteConfig = FirebaseRemoteConfig.getInstance()
 
+        // Always fetch fresh from Remote Config — no cache, no defaults
         val configSettings = FirebaseRemoteConfigSettings.Builder()
-            .setMinimumFetchIntervalInSeconds(3600)
+            .setMinimumFetchIntervalInSeconds(0)
             .build()
 
         remoteConfig.setConfigSettingsAsync(configSettings)
-        remoteConfig.setDefaultsAsync(mapOf(
-            REMOTE_CONFIG_KEY_DATABASE_URL to "https://edm-fire-app-default-rtdb.asia-southeast1.firebasedatabase.app/"
-        ))
     }
 
     private fun initializeFirebaseDatabase() {
-        val currentTime = System.currentTimeMillis()
-        val shouldFetchConfig = currentTime - lastConfigFetchTime > CONFIG_CACHE_DURATION
-
-        if (shouldFetchConfig) {
-            fetchDatabaseUrlFromRemoteConfig()
-        } else {
-            setupDatabaseWithUrl(getCachedDatabaseUrl())
-        }
+        // Always fetch fresh from Remote Config
+        fetchDatabaseUrlFromRemoteConfig()
     }
 
     private fun fetchDatabaseUrlFromRemoteConfig() {
