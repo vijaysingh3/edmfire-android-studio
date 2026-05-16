@@ -31,7 +31,6 @@ class WalletFragment : Fragment() {
     private lateinit var tvWinningsCoin: TextView
     private lateinit var tvReferralCoins: TextView
 
-    private val FALLBACK_PAYMENT_URL = "https://edmfire-payment-gateways.vercel.app/deposit"
     private val RUPEE_TO_PAISA = 100
     private val decimalFormat = DecimalFormat("#.##")
 
@@ -97,7 +96,7 @@ class WalletFragment : Fragment() {
             setConfigSettingsAsync(remoteConfigSettings {
                 minimumFetchIntervalInSeconds = 3600
             })
-            setDefaultsAsync(mapOf("paymentPageUrl" to FALLBACK_PAYMENT_URL))
+            setDefaultsAsync(mapOf("paymentPageUrl" to ""))
         }
         remoteConfig.fetchAndActivate().addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -109,8 +108,7 @@ class WalletFragment : Fragment() {
     }
 
     private fun getPaymentPageUrl(): String {
-        val url = remoteConfig.getString("paymentPageUrl")
-        return if (url.isNotEmpty()) url else FALLBACK_PAYMENT_URL
+        return remoteConfig.getString("paymentPageUrl")
     }
 
     // ============================================================
