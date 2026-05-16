@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_progress_tracker_shimmer"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <!-- Top Message -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:text="आपने इस Divice/phone  से पहले ही account बना लिया है,\nPlease enter your password and login again."
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <!-- Info Message -->
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="⚠️ One device per account allowed. Multiple account not supported."
+        android:textColor="#FF4444"
+        android:textSize="14sp" />
+
+    <!-- Important Notice -->
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="👇 यह आपकी last SignUp Gmail है.\nPlease enter your password and continue login. 👇"
+        android:textAlignment="center"
+        android:textColor="#FF9800"
+        android:textSize="16sp"
+        android:textStyle="bold|italic" />
+
+    <!-- Registered Email Display -->
+    <TextView
+        android:id="@+id/tvStoredEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@android:drawable/screen_background_dark"
+        android:fontFamily="@font/zen_dots"
+        android:text="Registered Email"
+        android:textAlignment="center"
+        android:textColor="#FFEB3B"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <!-- Password Input -->
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="🔑 Enter your password"
+            android:inputType="textPassword"
+            android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Show Password + Forgot Password -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cbShowPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="👁 Show password" />
+
+        <TextView
+            android:id="@+id/tvForgotPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:padding="8dp"
+            android:text="Forgot Password?"
+            android:textColor="@color/neon_pink_light"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Loading Progress -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone" />
+
+    <!-- Login Button -->
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="➡️ Login"
+        android:textAllCaps="false" />
+</LinearLayout>

@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_main_gradient">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#1D7B06AD">
+
+        <ScrollView
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="24dp">
+
+                <!-- Top Row: Back + Logo -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:layout_marginBottom="12dp">
+
+                    <ImageView
+                        android:id="@+id/ivBack"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/bg_progress_tracker_shimmer"
+                        android:contentDescription="@string/desc_back_button_50"
+                        android:padding="8dp"
+                        android:src="@drawable/baseline_arrow_back_24"
+                        app:tint="#FFFFFF" />
+
+                    <ImageView
+                        android:id="@+id/ivLogo"
+                        android:layout_width="68dp"
+                        android:layout_height="62dp"
+                        android:layout_centerInParent="true"
+                        android:contentDescription="@string/desc_logo_49"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/applogo" />
+
+                </RelativeLayout>
+
+                <!-- Title -->
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="6dp"
+                    android:letterSpacing="0.12"
+                    android:text="@string/ui_create_account_62"
+                    android:textAllCaps="true"
+                    android:textColor="#FFFFFF"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+
+                <!-- Subtitle -->
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabAIAgent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="AI Agent"
+                    android:src="@drawable/customer_service"
+                    app:backgroundTint="#6C63FF"
+                    app:fabSize="normal"
+                    app:rippleColor="#9C94FF"
+                    app:tint="#FFFFFF" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="#AA000000"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="2dp"
+                    android:text="Help"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvSubtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:lineSpacingExtra="4sp"
+                    android:text="@string/ui_join_gaming_experience_63"
+                    android:textColor="#03EF0C"
+                    android:textSize="13sp" />
+
+                <!-- Already have account row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/bg_progress_tracker_shimmer"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingVertical="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ui_already_have_account_78"
+                        android:textColor="#CDDC39"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/tvLogin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/bg_chat_input"
+                        android:padding="6dp"
+                        android:text="@string/ui_login_button_79"
+                        android:textColor="#FF00F2FE"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <!-- Sign up by Google label -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:gravity="center"
+                    android:text="@string/ui_sign_up_by_google_64"
+                    android:textColor="#FFD700"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <!-- Google Sign In Button -->
+                <com.google.android.gms.common.SignInButton
+                    android:id="@+id/btnGoogleSignIn"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- Gmail selecting progress -->
+                <ProgressBar
+                    android:id="@+id/gmail_selecting_progressbar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
+                <!-- Selected Email Display -->
+                <TextView
+                    android:id="@+id/tvSelectedEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/bg_entry_card"
+                    android:gravity="center"
+                    android:paddingVertical="10dp"
+                    android:text="@string/ui_no_email_selected_65"
+                    android:textColor="#80FFFFFF"
+                    android:textSize="13sp"
+                    android:visibility="gone" />
+
+                <!-- Password Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilPassword"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:hint="@string/ui_password_hint_66"
+                    app:boxBackgroundColor="#20FFFFFF"
+                    app:boxStrokeColor="#FF00F2FE"
+                    app:endIconMode="password_toggle"
+                    app:endIconTint="#FF00F2FE"
+                    app:hintTextColor="#80FFFFFF">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:background="@null"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPassword"
+                        android:paddingHorizontal="16dp"
+                        android:textColor="#FFFFFF"
+                        android:textColorHint="#80FFFFFF"
+                        android:textSize="15sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Referral Section Card -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/bg_info_card"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/tvReferPrompt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:gravity="center"
+                        android:text="@string/ui_referral_prompt_67"
+                        android:textColor="#FFD700"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/llReferOptions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btnNoRefer"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_neon_card"
+                            android:fontFamily="@font/alatsi"
+                            android:text="@string/ui_no_button_69"
+                            android:textAllCaps="false"
+                            android:textColor="#FF00F2FE"
+                            android:textSize="14sp"
+                            app:rippleColor="#E91E63" />
+
+                        <Button
+                            android:id="@+id/btnYesRefer"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/alice"
+                            android:text="@string/ui_yes_button_68"
+                            android:textAllCaps="false"
+                            android:textColor="#FFFFFF"
+                            android:textSize="14sp"
+                            app:rippleColor="#09E912" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Refer Code Input -->
+                <LinearLayout
+                    android:id="@+id/llReferSection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilReferCode"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        android:hint="@string/ui_enter_promo_code_hint_70"
+                        app:boxBackgroundColor="#20FFFFFF"
+                        app:boxStrokeColor="#FF00F2FE"
+                        app:hintTextColor="#80FFFFFF">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etReferCode"
+                            android:layout_width="match_parent"
+                            android:layout_height="52dp"
+                            android:background="@null"
+                            android:imeOptions="actionDone"
+                            android:inputType="textCapCharacters"
+                            android:paddingHorizontal="16dp"
+                            android:textColor="#FFFFFF"
+                            android:textColorHint="#80FFFFFF"
+                            android:textSize="15sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/tvApplyRefer"
+                        android:layout_width="78dp"
+                        android:layout_height="52dp"
+                        android:background="@drawable/bg_neon_button"
+                        android:gravity="center"
+                        android:text="@string/ui_apply_button_71"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvAppliedSuccess"
+                        android:layout_width="78dp"
+                        android:layout_height="52dp"
+                        android:background="#00FFFFFF"
+                        android:gravity="center"
+                        android:text="@string/ui_applied_button_72"
+                        android:textColor="#05FB0F"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+                <!-- Promo Status -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvPromoSuccess"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/ui_promo_success_message_73"
+                        android:textColor="#4CAF50"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tvPromoInvalid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/ui_promo_invalid_message_74"
+                        android:textColor="#FF5252"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+                <!-- Terms & Conditions -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/cbTerms"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="#1EE932" />
+
+                    <TextView
+                        android:id="@+id/tv_goto_privacy"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="sans-serif-black"
+                        android:paddingVertical="4dp"
+                        android:text="@string/ui_terms_and_conditions_75"
+                        android:textColor="#FF00F2FE"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <!-- Sign Up Button -->
+                <Button
+                    android:id="@+id/btnSignUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="58dp"
+                    android:layout_marginBottom="14dp"
+                    android:background="@drawable/bg_neon_button"
+                    android:letterSpacing="0.05"
+                    android:text="@string/ui_sign_up_now_button_76"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <!-- Progress Bar -->
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="16dp"
+                    android:indeterminateTint="#FF00F2FE"
+                    android:visibility="gone" />
+
+                <!-- Support Email -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="80dp"
+                    android:gravity="center"
+                    android:text="@string/ui_support_email_77"
+                    android:textColor="#03A9F4"
+                    android:textSize="11sp" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- ✅ Help FAB — Top Left fixed position -->
+        <LinearLayout
+            android:id="@+id/fabHelpContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

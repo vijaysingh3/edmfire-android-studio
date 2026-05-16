@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#0D0D1A">
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- Header                              -->
+    <!-- ═══════════════════════════════════ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="#12122A">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🏆 Leaderboard"
+            android:textColor="#FFD700"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Top Players by Winning Coins"
+            android:textColor="#888888"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_marginTop="2dp"/>
+
+    </LinearLayout>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- Column Headers                      -->
+    <!-- ═══════════════════════════════════ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:background="#16162E">
+
+        <TextView
+            android:layout_width="44dp"
+            android:layout_height="wrap_content"
+            android:text="Rank"
+            android:textColor="#888888"
+            android:textSize="10sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Player"
+            android:textColor="#888888"
+            android:textSize="10sp"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:text="Played"
+            android:textColor="#888888"
+            android:textSize="10sp"
+            android:gravity="center"
+            android:layout_marginEnd="4dp"/>
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:text="Wins"
+            android:textColor="#888888"
+            android:textSize="10sp"
+            android:gravity="center"
+            android:layout_marginEnd="4dp"/>
+
+        <TextView
+            android:layout_width="44dp"
+            android:layout_height="wrap_content"
+            android:text="Coins"
+            android:textColor="#FFD700"
+            android:textSize="10sp"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- Loading Progress (Initial fetch)    -->
+    <!-- ═══════════════════════════════════ -->
+    <ProgressBar
+        android:id="@+id/progressBarLeaderboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:visibility="visible"/>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- Empty State                         -->
+    <!-- ═══════════════════════════════════ -->
+    <TextView
+        android:id="@+id/tvEmptyLeaderboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No data found"
+        android:textColor="#888888"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:layout_marginTop="60dp"
+        android:visibility="gone"/>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- RecyclerView (main list)            -->
+    <!-- ═══════════════════════════════════ -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvLeaderboard"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp"
+        android:visibility="gone"
+        android:clipToPadding="false"/>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- Load More Progress (scroll spinner) -->
+    <!-- ═══════════════════════════════════ -->
+    <ProgressBar
+        android:id="@+id/loadMoreProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:visibility="gone"/>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- Load More Hint Text                 -->
+    <!-- ═══════════════════════════════════ -->
+    <TextView
+        android:id="@+id/tvLoadMore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="⬇ Scroll down to load more"
+        android:textColor="#888888"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:paddingTop="6dp"
+        android:paddingBottom="10dp"
+        android:visibility="gone"/>
+
+</LinearLayout>
