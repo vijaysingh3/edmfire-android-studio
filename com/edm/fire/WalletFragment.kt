@@ -96,7 +96,10 @@ class WalletFragment : Fragment() {
             setConfigSettingsAsync(remoteConfigSettings {
                 minimumFetchIntervalInSeconds = 3600
             })
-            setDefaultsAsync(mapOf("paymentPageUrl" to ""))
+            setDefaultsAsync(mapOf(
+                "paymentPageUrl" to "",
+                "PaymentSwitch" to "DepositActivity"
+            ))
         }
         remoteConfig.fetchAndActivate().addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -109,6 +112,10 @@ class WalletFragment : Fragment() {
 
     private fun getPaymentPageUrl(): String {
         return remoteConfig.getString("paymentPageUrl")
+    }
+
+    private fun isWebPaymentMode(): Boolean {
+        return remoteConfig.getString("PaymentSwitch").equals("Web", ignoreCase = true)
     }
 
     // ============================================================
@@ -248,7 +255,7 @@ class WalletFragment : Fragment() {
     // ============================================================
 
     private fun navigateToDeposit() {
-        android.util.Log.d("WalletFragment", "🚀 Navigating to Deposit")
+        android.util.Log.d("WalletFragment", "🚀 Deposit button clicked")
 
         val currentUser = auth.currentUser
         if (currentUser == null) {
@@ -257,25 +264,33 @@ class WalletFragment : Fragment() {
             return
         }
 
-        currentUser.getIdToken(false).addOnCompleteListener { task ->
-            if (task.isSuccessful && task.result != null) {
-                val token = task.result!!.token ?: ""
-                val uid = currentUser.uid
-                val paymentUrl = getPaymentPageUrl()
+        if (isWebPaymentMode()) {
+            // Web mode → WebView with paymentPageUrl
+            android.util.Log.d("WalletFragment", "🌐 PaymentSwitch = Web → opening WebView")
+            currentUser.getIdToken(false).addOnCompleteListener { task ->
+                if (task.isSuccessful && task.result != null) {
+                    val token = task.result!!.token ?: ""
+                    val uid = currentUser.uid
+                    val paymentUrl = getPaymentPageUrl()
 
-                android.util.Log.d("WalletFragment", "🔗 Opening payment page URL: $paymentUrl")
-                android.util.Log.d("WalletFragment", "👤 User UID: $uid")
+                    android.util.Log.d("WalletFragment", "🔗 Opening payment page URL: $paymentUrl")
+                    android.util.Log.d("WalletFragment", "👤 User UID: $uid")
 
-                val intent = Intent(requireContext(), WebviewActivity::class.java)
-                intent.putExtra("url", paymentUrl)
-                intent.putExtra("token", token)
-                intent.putExtra("uid", uid)
-                intent.putExtra("title", "Add Coins")
-                startActivity(intent)
-            } else {
-                android.util.Log.e("WalletFragment", "❌ Failed to get ID token")
-                Toast.makeText(requireContext(), "Authentication failed. Please try again.", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(requireContext(), WebviewActivity::class.java)
+                    intent.putExtra("url", paymentUrl)
+                    intent.putExtra("token", token)
+                    intent.putExtra("uid", uid)
+                    intent.putExtra("title", "Add Coins")
+                    startActivity(intent)
+                } else {
+                    android.util.Log.e("WalletFragment", "❌ Failed to get ID token")
+                    Toast.makeText(requireContext(), "Authentication failed. Please try again.", Toast.LENGTH_SHORT).show()
+                }
             }
+        } else {
+            // DepositActivity mode (fallback/default)
+            android.util.Log.d("WalletFragment", "📱 PaymentSwitch = DepositActivity → opening DepositActivity")
+            startActivity(Intent(requireContext(), DepositActivity::class.java))
         }
     }
 
