@@ -31,7 +31,7 @@ class WalletFragment : Fragment() {
     private lateinit var tvWinningsCoin: TextView
     private lateinit var tvReferralCoins: TextView
 
-    private val FALLBACK_DEPOSIT_URL = "https://edmfire-payment-gateways.vercel.app/deposit"
+    private val FALLBACK_PAYMENT_URL = "https://edmfire-payment-gateways.vercel.app/deposit"
     private val RUPEE_TO_PAISA = 100
     private val decimalFormat = DecimalFormat("#.##")
 
@@ -97,7 +97,7 @@ class WalletFragment : Fragment() {
             setConfigSettingsAsync(remoteConfigSettings {
                 minimumFetchIntervalInSeconds = 3600
             })
-            setDefaultsAsync(mapOf("web_deposit_url" to FALLBACK_DEPOSIT_URL))
+            setDefaultsAsync(mapOf("paymentPageUrl" to FALLBACK_PAYMENT_URL))
         }
         remoteConfig.fetchAndActivate().addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -108,9 +108,9 @@ class WalletFragment : Fragment() {
         }
     }
 
-    private fun getDepositUrl(): String {
-        val url = remoteConfig.getString("web_deposit_url")
-        return if (url.isNotEmpty()) url else FALLBACK_DEPOSIT_URL
+    private fun getPaymentPageUrl(): String {
+        val url = remoteConfig.getString("paymentPageUrl")
+        return if (url.isNotEmpty()) url else FALLBACK_PAYMENT_URL
     }
 
     // ============================================================
@@ -263,13 +263,13 @@ class WalletFragment : Fragment() {
             if (task.isSuccessful && task.result != null) {
                 val token = task.result!!.token ?: ""
                 val uid = currentUser.uid
-                val depositUrl = getDepositUrl()
+                val paymentUrl = getPaymentPageUrl()
 
-                android.util.Log.d("WalletFragment", "🔗 Opening deposit URL: $depositUrl")
+                android.util.Log.d("WalletFragment", "🔗 Opening payment page URL: $paymentUrl")
                 android.util.Log.d("WalletFragment", "👤 User UID: $uid")
 
                 val intent = Intent(requireContext(), WebviewActivity::class.java)
-                intent.putExtra("url", depositUrl)
+                intent.putExtra("url", paymentUrl)
                 intent.putExtra("token", token)
                 intent.putExtra("uid", uid)
                 intent.putExtra("title", "Add Coins")
