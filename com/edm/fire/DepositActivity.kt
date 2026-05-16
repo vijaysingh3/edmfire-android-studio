@@ -68,7 +68,7 @@ class DepositActivity : AppCompatActivity() {
     // Remote Config
     private var lastConfigFetchTime: Long = 0
     private val CONFIG_CACHE_DURATION = 24 * 60 * 60 * 1000L
-    private val REMOTE_CONFIG_KEY_DATABASE_URL = "FirebaseDatabase_url"
+    private val REMOTE_CONFIG_KEY_DATABASE_URL = "main_database_rtdb"
 
     companion object {
         private const val PREF_NAME_FIREBASE_CONFIG = "FirebaseConfig"
