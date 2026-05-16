@@ -133,6 +133,9 @@ class DepositActivity : AppCompatActivity() {
             .build()
 
         remoteConfig.setConfigSettingsAsync(configSettings)
+        remoteConfig.setDefaultsAsync(mapOf(
+            REMOTE_CONFIG_KEY_DATABASE_URL to "https://edm-fire-app-default-rtdb.asia-southeast1.firebasedatabase.app/"
+        ))
     }
 
     private fun initializeFirebaseDatabase() {
